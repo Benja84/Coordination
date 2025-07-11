@@ -61,7 +61,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>Date de début</th>
+                    {{-- <th>Date de début</th> --}}
                     <th>Matériel prescrit</th>
                     <th>Fréquence d'utilisation</th>
                     <th>Fournisseur / Marque</th>
@@ -70,7 +70,7 @@
             <tbody>
                 @foreach($record->equipments as $equipment)
                 <tr>
-                    <td>{{ $equipment['startDate'] ? \Carbon\Carbon::parse($equipment['startDate'])->format('d/m/Y') : '-' }}</td>
+                    {{-- <td>{{ $equipment['startDate'] ? \Carbon\Carbon::parse($equipment['startDate'])->format('d/m/Y') : '-' }}</td> --}}
                     <td>{{ $equipment['material'] }}</td>
                     <td>{{ $equipment['frequency'] }}</td>
                     <td>{{ $equipment['supplier'] }}</td>
@@ -80,13 +80,13 @@
         </table>
     </div>
 
-    @if(count($record->sonde_followup) > 0)
+    @if($record->sonde_followup && count($record->sonde_followup) > 0)
     <div class="section">
         <div class="section-title">Sondage</div>
         <table>
             <thead>
                 <tr>
-                    <th>Date</th>
+                    {{-- <th>Date</th> --}}
                     <th>Autonomie</th>
                     <th>Technique</th>
                     <th>Complications observées</th>
@@ -96,7 +96,7 @@
             <tbody>
                 @foreach($record->sonde_followup as $sonde)
                 <tr>
-                    <td>{{ \Carbon\Carbon::parse($sonde['date'])->format('d/m/Y') }}</td>
+                    {{-- <td>{{ \Carbon\Carbon::parse($sonde['date'])->format('d/m/Y') }}</td> --}}
                     <td>{{ $sonde['autonomy'] }}</td>
                     <td>{{ $sonde['technique'] }}</td>
                     <td>{{ $sonde['complications'] ?? '-' }}</td>
@@ -120,10 +120,10 @@
         @if($record->care_types['irrigation']), Irrigation trans-anale @endif
         <br>
         <strong>Appareillage:</strong> {{ count($record->equipments) }} appareil(s) prescrit(s)<br>
-        <strong>Évaluations:</strong>
+        {{-- <strong>Évaluations:</strong>
         {{ count($record->sonde_followup) }} sondage(s),
         {{ count($record->stoma_followup) }} stomie(s),
-        {{ count($record->wound_followup) }} plaie(s)
+        {{ count($record->wound_followup) }} plaie(s) --}}
     </div>
 </body>
 </html>
