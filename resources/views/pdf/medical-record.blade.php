@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dossier Médical #{{ $record->id }}</title>
+    <title>Dossier Médical {{ $record->patient_name }}</title>
     <style>
-        body { font-family: 'Roboto', sans-serif; color: #5d4037; }
+        body { font-family: 'Roboto', sans-serif; color: #5d4037;font-size: 12px; }
         .header { text-align: center; margin-bottom: 30px; }
         .title { font-size: 24px; font-weight: bold; margin-bottom: 10px; }
-        .subtitle { font-size: 18px; margin-bottom: 20px; }
+        .subtitle { font-size: 15px; margin-bottom: 20px; }
         .section { margin-bottom: 30px; }
-        .section-title { font-size: 20px; font-weight: bold; border-bottom: 2px solid #ffb300; padding-bottom: 5px; margin-bottom: 15px; }
+        .section-title { font-size: 15px; font-weight: bold; border-bottom: 2px solid #ffb300; padding-bottom: 5px; margin-bottom: 15px; }
         table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
         th { background-color: #ffb300; }
@@ -19,7 +19,7 @@
     <div class="header">
         <div class="title">La coordination</div>
         <div class="subtitle">Fiche de Suivi - Sondage Intermittent / Stomie / Soins des Plaies</div>
-        <div>Dossier médical #{{ $record->id }}</div>
+        {{-- <div>Dossier médical #{{ $record->id }}</div> --}}
     </div>
 
     <div class="section">
@@ -108,9 +108,86 @@
     </div>
     @endif
 
-    <!-- Ajouter des sections similaires pour stomie et plaies -->
+    @if($record->stoma_followup && count($record->stoma_followup) > 0)
+    <div class="section">
+        <div class="section-title">Stoma</div>
+        <table>
+            <thead>
+                <tr>
+                    {{-- <th>Date</th> --}}
+                    <th>Type de stomie</th>
+                    <th>Etat de la peau</th>
+                    <th>Complications</th>
+                    <th>Commentaires</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($record->stoma_followup as $stoma)
+                <tr>
+                    {{-- <td>{{ \Carbon\Carbon::parse($sonde['date'])->format('d/m/Y') }}</td> --}}
+                    <td>{{ $stoma['type'] }}</td>
+                    <td>{{ $stoma['skinState'] }}</td>
+                    <td>{{ $stoma['problem'] ?? '-' }}</td>
+                    <td>{{ $stoma['comments'] }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    @endif
 
-    <div class="summary">
+    @if($record->wond_followup && count($record->wond_followup) > 0)
+    <div class="section">
+        <div class="section-title">Plaies</div>
+        <table>
+            <thead>
+                <tr>
+                    {{-- <th>Date</th> --}}
+                    <th>Type de plaie</th>
+                    <th>Localisation</th>
+                    <th>Evolution</th>
+                    <th>Produits utilisés</th>
+                    <th>Commentaires</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($record->wond_followup as $wond)
+                <tr>
+                    {{-- <td>{{ \Carbon\Carbon::parse($sonde['date'])->format('d/m/Y') }}</td> --}}
+                    <td>{{ $wond['type'] }}</td>
+                    <td>{{ $wond['location'] }}</td>
+                    <td>{{ $wond['evolution'] ?? '-' }}</td>
+                    <td>{{ $wond['products'] }}</td>
+                    <td>{{ $wond['comments'] }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    @endif
+
+    <div class="section">
+        <div class="section-title">Observations générales / Suivi à domicile </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Observation / Intervention réalisée </th>
+                    <th>Nom du professionnel </th>
+                    <th>Signature</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="height: 50px!important"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+   
+
+    {{-- <div class="summary">
         <strong>Résumé du dossier:</strong><br>
         <strong>Patient:</strong> {{ $record->patient_name }}<br>
         <strong>Prise en charge:</strong>
@@ -120,10 +197,10 @@
         @if($record->care_types['irrigation']), Irrigation trans-anale @endif
         <br>
         <strong>Appareillage:</strong> {{ count($record->equipments) }} appareil(s) prescrit(s)<br>
-        {{-- <strong>Évaluations:</strong>
+        <strong>Évaluations:</strong>
         {{ count($record->sonde_followup) }} sondage(s),
         {{ count($record->stoma_followup) }} stomie(s),
-        {{ count($record->wound_followup) }} plaie(s) --}}
-    </div>
+        {{ count($record->wound_followup) }} plaie(s)
+    </div> --}}
 </body>
 </html>
