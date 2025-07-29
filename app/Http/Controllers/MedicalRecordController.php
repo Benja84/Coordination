@@ -14,9 +14,9 @@ class MedicalRecordController extends Controller
         // $records = MedicalRecord::orderBy('created_at', 'desc')->get();
         // return view('records', compact('records'));
         if ($request->ajax() || $request->wantsJson()) {
-        $records = MedicalRecord::orderBy('created_at', 'desc')->get();
-        return response()->json($records);
-    }
+            $records = MedicalRecord::orderBy('created_at', 'desc')->get();
+            return response()->json($records);
+        }
         return view('form');
     }
 

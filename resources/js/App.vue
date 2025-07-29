@@ -1,26 +1,29 @@
 <template>
     <div class="app-container">
         <!-- En-tête de l'application -->
-        <!--<header>
+        <header>
             <div class="logo">
                 <i class="fas fa-hand-holding-medical"></i>
-                <span>Coordination Médicale</span>
+                <span>La coordination</span>
             </div>
             <div class="user-info">
-                <i class="fas fa-user-nurse"></i>
-                <span>Infirmier(e) Connecté</span>
-                <div class="status-indicator">
-                    <div class="status-dot"></div>
-                    <span>En ligne</span>
+                <!--<i class="fas fa-user-nurse"></i>
+                <span>Infirmier(e) Connecté</span>-->
+                <div class="status-indicator" @click="logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Déconnexion</span>
                 </div>
+                <!--<button class="btn btn-secondary" @click="logout">
+                    <i class="fas fa-sign-out-alt"></i> Déconnexion
+                </button>-->
             </div>
-        </header>-->
+        </header>
         
         <!-- Titre de l'application -->
-        <div class="app-title">
+        <!--<div class="app-title">
             <h1>La coordination</h1>
             <h2>Fiche de Suivi - Sondage Intermittent / Stomie / Soins des Plaies</h2>
-        </div>
+        </div>-->
         
         <!-- Navigation entre les pages -->
         <div class="navigation" :style="navStyle">
@@ -640,6 +643,10 @@ export default {
         
     },
     methods: {
+        async logout() {
+            await axios.post('/logout');
+            location.href = '/';
+        },
         // Méthodes pour le formulaire
         addEquipment() {
             this.equipments.push({ 
