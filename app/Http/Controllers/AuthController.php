@@ -37,7 +37,8 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return response()->json(['success' => true]);
+            return redirect()->intended('/home');
+            // return response()->json(['success' => true]);
         }
         return response()->json(['success' => false, 'message' => 'Email ou mot de passe incorrects'], 422);
     }

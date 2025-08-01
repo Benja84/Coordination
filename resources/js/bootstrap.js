@@ -9,7 +9,7 @@ window._ = _;
 
 import axios from 'axios';
 import toastr from 'toastr';
-
+axios.defaults.withCredentials = true; 
 window.axios = axios;
 
 window.toastr = toastr;

@@ -20,31 +20,25 @@ use App\Http\Controllers\AuthController;
 //     return view('welcome');
 // });
 
+// Guest routes
 Route::middleware('guest')->group(function () {
-    Route::view('/login', 'login')->name('login');   // <-- ajouter ceci
+    Route::view('/login', 'login')->name('login');
     Route::post('/login', [AuthController::class, 'login']);
 });
-// Route::post('/register', [AuthController::class, 'register']);
+// Authenticated routes
+Route::get('/home', function () {
+    return view('home');
+})->middleware('auth')->name('home');
 Route::middleware('auth')->group(function () {
-    Route::post('/logout', [AuthController::class, 'logout']);
-    // Route::apiResource('records', MedicalRecordController::class);
-    // Page d'accueil avec la liste des dossiers
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/', [MedicalRecordController::class, 'index'])->name('records.index');
     Route::get('/records', [MedicalRecordController::class, 'index']);
-
-    // Formulaire de création
     Route::get('/records/create', [MedicalRecordController::class, 'create'])->name('records.create');
-
-    // Sauvegarde d'un nouveau dossier
     Route::post('/records', [MedicalRecordController::class, 'store'])->name('records.store');
-
-    // Affichage d'un dossier spécifique
     Route::get('/records/{record}', [MedicalRecordController::class, 'show'])->name('records.show');
-
-    // Export PDF
     Route::get('/records/{record}/export-pdf', [MedicalRecordController::class, 'exportPdf'])->name('records.export-pdf');
 });
-
+Route::middleware('auth')->get('/user', fn () => auth()->user());
 // Toute autre URL : on sert l’appli Vue
 Route::get('/{any?}', function () {
     return view('app');

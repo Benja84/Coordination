@@ -7,8 +7,8 @@
                 <span>La coordination</span>
             </div>
             <div class="user-info">
-                <!--<i class="fas fa-user-nurse"></i>
-                <span>Infirmier(e) Connecté</span>-->
+                <i class="fas fa-user-nurse"></i>
+                <span>{{ user?.name || 'Invité' }}</span>
                 <div class="status-indicator" @click="logout">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Déconnexion</span>
@@ -629,7 +629,8 @@ export default {
             records: [],
             currentRecord: null,
             searchQuery: '',
-            loading: false
+            loading: false,
+            user: null,
         };
     },
     computed: {
@@ -641,6 +642,16 @@ export default {
             );
         }
         
+    },
+    async mounted() {
+        try {
+        const { data } = await axios.get('/user');   // web guard + cookie
+        this.user = data;
+        console.log('user-data',data)
+        } catch {
+        // non connecté ou erreur réseau
+        console.log('user-data','nothing')
+        }
     },
     methods: {
         async logout() {

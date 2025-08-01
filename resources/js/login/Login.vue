@@ -28,12 +28,8 @@ export default {
   methods: {
     async login() {
       try {
-        await axios.post('/login', this.form, {
-            headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-            },
-        });
-        location.href = '/'; // rechargement complet → Vue affichera l’appli
+        await axios.post('/login', this.form);
+        window.location.replace('/home'); // rechargement complet → Vue affichera l’appli
       } catch (e) {
         this.error = e.response?.data?.message || 'Erreur';
       }
