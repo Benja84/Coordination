@@ -8,7 +8,7 @@
             </div>
             <div class="user-info">
                 <i class="fas fa-user-nurse"></i>
-                <span>{{ user?.name || 'Invité' }}</span>
+                <span>{{ user?.name }}</span>
                 <div class="status-indicator" @click="logout">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Déconnexion</span>
