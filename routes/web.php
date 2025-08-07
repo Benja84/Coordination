@@ -3,22 +3,9 @@
 use App\Http\Controllers\MedicalRecordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 // Guest routes
 Route::middleware('guest')->group(function () {
@@ -26,6 +13,14 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
 });
 // Authenticated routes
+Route::middleware('auth')->group(function () {
+    //  Route::get('/users/create', function () {
+    //     return view('admin.new-user');
+    // });
+
+    Route::post('/users/save', [UserController::class, 'store'])->name('admin.users.store');
+    // Route::get('/{any?}', fn () => view('layouts.app'))->where('any', '^(?!users).*$');
+});
 Route::get('/home', function () {
     return view('home');
 })->middleware('auth')->name('home');
@@ -40,7 +35,5 @@ Route::middleware('auth')->group(function () {
 });
 Route::middleware('auth')->get('/user', fn () => auth()->user());
 // Toute autre URL : on sert l’appli Vue
-Route::get('/{any?}', function () {
-    return view('app');
-})->where('any', '.*')->middleware('auth');  // protégée
-
+Route::middleware('auth')->get('/{any?}', fn () => view('layouts.app'))
+     ->where('any', '.*');  // protégée

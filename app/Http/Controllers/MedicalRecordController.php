@@ -14,7 +14,10 @@ class MedicalRecordController extends Controller
         // $records = MedicalRecord::orderBy('created_at', 'desc')->get();
         // return view('records', compact('records'));
         if ($request->ajax() || $request->wantsJson()) {
-            $records = MedicalRecord::orderBy('created_at', 'desc')->get();
+            if(auth()->user()->is_admin)
+                $records = MedicalRecord::orderBy('created_at', 'desc')->get();
+            else
+                $records = MedicalRecord::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
             return response()->json($records);
         }
         return view('form');
@@ -48,6 +51,7 @@ class MedicalRecordController extends Controller
             'sonde_followup' => $request->sondeFollowup,
             'stoma_followup' => $request->stomaFollowup,
             'wound_followup' => $request->woundFollowup,
+            'user_id' => auth()->user()->id
         ]);
 
         return response()->json([
@@ -68,6 +72,6 @@ class MedicalRecordController extends Controller
         ];
 
         $pdf = PDF::loadView('pdf.medical-record', $data);
-        return $pdf->download('dossier-medical-'.$record->id.'.pdf');
+        return $pdf->download('dossier-medical-'.$record->patient_name.'.pdf');
     }
 }

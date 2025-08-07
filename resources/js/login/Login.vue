@@ -29,7 +29,7 @@ export default {
     async login() {
       try {
         await axios.post('/login', this.form);
-        window.location.replace('/home'); // rechargement complet → Vue affichera l’appli
+        window.location.replace('/'); // rechargement complet → Vue affichera l’appli
       } catch (e) {
         this.error = e.response?.data?.message || 'Erreur';
       }

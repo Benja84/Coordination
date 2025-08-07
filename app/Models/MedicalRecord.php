@@ -20,7 +20,8 @@ class MedicalRecord extends Model
         'equipments',
         'sonde_followup',
         'stoma_followup',
-        'wound_followup'
+        'wound_followup',
+        'user_id'
     ];
 
     protected $casts = [
