@@ -11,14 +11,35 @@ class MedicalRecordController extends Controller
 {
     public function index(Request $request)
     {
-        // $records = MedicalRecord::orderBy('created_at', 'desc')->get();
-        // return view('records', compact('records'));
         if ($request->ajax() || $request->wantsJson()) {
-            if(auth()->user()->is_admin)
-                $records = MedicalRecord::orderBy('created_at', 'desc')->get();
-            else
-                $records = MedicalRecord::where('user_id',auth()->user()->id)->orderBy('created_at', 'desc')->get();
-            return response()->json($records);
+            $perPage = $request->input('per_page', 10);
+            $page = $request->input('page', 1);
+            $search = $request->input('search', '');
+
+            $query = MedicalRecord::query();
+
+            if ($search) {
+                $query->where('patient_name', 'like', '%' . $search . '%');
+            }
+
+            if (!auth()->user()->is_admin) {
+                $query->where('user_id', auth()->user()->id);
+            }
+
+            $records = $query->orderBy('created_at', 'desc')
+                            ->paginate($perPage, ['*'], 'page', $page);
+
+            return response()->json([
+                'data' => $records->items(),
+                'pagination' => [
+                    'current_page' => $records->currentPage(),
+                    'per_page' => $records->perPage(),
+                    'total' => $records->total(),
+                    'last_page' => $records->lastPage(),
+                    'from' => ($records->currentPage() - 1) * $records->perPage() + 1,
+                    'to' => min($records->currentPage() * $records->perPage(), $records->total())
+                ]
+            ]);
         }
         return view('form');
     }

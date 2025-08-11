@@ -7,6 +7,8 @@
                 <span>La coordination</span>
             </div>
             <div class="user-info">
+                <i class="fas fa-user-nurse"></i>
+                <span>{{ user?.is_admin ? 'Admin' : user?.firstname }}</span>
                 <button
                 v-if="user && user.is_admin"
                 class="btn btn-secondary"
@@ -14,8 +16,7 @@
                 >
                     <i class="fas fa-user-plus"></i> 
                 </button>
-                <!--<i class="fas fa-user-nurse"></i>
-                <span>{{ user?.firstname }}</span>-->
+                
                 <div class="status-indicator" @click="logout">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Déconnexion</span>
@@ -189,7 +190,7 @@
                                             <th>Technique maîtrisée ?</th>
                                             <th>Complications observées</th>
                                             <th>Commentaires</th>
-                                            <th>Action</th>
+                                            <!--<th>Action</th>-->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -213,11 +214,11 @@
                                                 </select>-->
                                                 <textarea v-model="sonde.mastery" required rows="2" placeholder="Commentaires"></textarea>
                                             </td>
-                                            <td>
+                                            <!--<td>
                                                 <button class="btn btn-delete" @click="removeSonde(index)">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
-                                            </td>
+                                            </td>-->
                                         </tr>
                                     </tbody>
                                 </table>
@@ -239,7 +240,7 @@
                                             <th>État de la peau péristomiale</th>
                                             <th>Problème rencontré</th>
                                             <th>Commentaires</th>
-                                            <th>Actions</th>
+                                            <!--<th>Actions</th>-->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -262,11 +263,11 @@
                                             </td>
                                             <td><textarea v-model="stoma.problem" rows="2" placeholder="Décrire le problème" required></textarea></td>
                                             <td><textarea v-model="stoma.comments" rows="2" placeholder="Ajouter des commentaires"></textarea></td>
-                                            <td>
+                                            <!--<td>
                                                 <button class="btn btn-delete" @click="removeStoma(index)">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
-                                            </td>
+                                            </td>-->
                                         </tr>
                                     </tbody>
                                 </table>
@@ -289,7 +290,7 @@
                                             <th>Évolution</th>
                                             <th>Produits utilisés</th>
                                             <th>Commentaires</th>
-                                            <th>Actions</th>
+                                            <!--<th>Actions</th>-->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -313,11 +314,11 @@
                                             </td>
                                             <td><textarea v-model="wound.products" rows="2" placeholder="Liste des produits" required></textarea></td>
                                             <td><textarea v-model="wound.comments" rows="2" placeholder="Ajouter des commentaires"></textarea></td>
-                                            <td>
+                                            <!--<td>
                                                 <button class="btn btn-delete" @click="removeWound(index)">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
-                                            </td>
+                                            </td>-->
                                         </tr>
                                     </tbody>
                                 </table>
@@ -364,17 +365,24 @@
                     <div class="records-header">
                         <h3><i class="fas fa-folder-open"></i> Dossiers médicaux enregistrés</h3>
                         <div class="search-box">
-                            <input type="text" v-model="searchQuery" placeholder="Rechercher un patient...">
+                            <input type="text" v-model="searchQuery" placeholder="Rechercher un patient..." @input="handleSearch">
                             <i class="fas fa-search"></i>
                         </div>
                     </div>
                     
+                    <div class="records-info">
+                        <!--Affichage de {{ startIndex + 1 }} à {{ endIndex }} sur {{ filteredRecords.length }} dossiers-->
+                        <span v-if="pagination.total > 0">
+                        Affichage des dossiers {{ pagination.from }} à {{ pagination.to }} 
+                        sur {{ pagination.total }} au total
+                        </span>
+                    </div>
                     <div class="records-list">
                         <div v-if="loading" class="loading">
                             <i class="fas fa-spinner fa-spin"></i> Chargement des dossiers...
                         </div>
                         
-                        <div v-if="filteredRecords.length === 0 && !loading" class="no-records">
+                        <div v-if="records.length === 0 && !loading" class="no-records">
                             <i class="fas fa-folder-open"></i>
                             <p>Aucun dossier médical enregistré</p>
                             <button class="btn btn-primary" @click="viewMode = 'form'">
@@ -382,7 +390,7 @@
                             </button>
                         </div>
                         
-                        <div v-for="record in filteredRecords" :key="record.id" class="record-card">
+                        <div v-for="record in records" :key="record.id" class="record-card">
                             <div class="record-header">
                                 <div class="patient-info">
                                     <h4>{{ record.patient_name }}</h4>
@@ -412,6 +420,36 @@
                                 </p>-->
                             </div>
                         </div>
+                    </div>
+                    <!--Pagination-->
+                    <div class="pagination" v-if="pagination.last_page > 1">
+                        <button 
+                            class="pagination-btn" 
+                            @click="changePage(pagination.current_page - 1)" 
+                            :disabled="pagination.current_page === 1"
+                            >
+                            <i class="fas fa-chevron-left"></i> Précédent
+                        </button>
+                        
+                        <div class="pagination-pages">
+                        <button 
+                            v-for="page in pages" 
+                            :key="page" 
+                            class="page-btn"
+                            :class="{ active: page === pagination.current_page }"
+                            @click="changePage(page)"
+                        >
+                            {{ page }}
+                        </button>
+                        </div>
+                        
+                        <button 
+                            class="pagination-btn" 
+                            @click="changePage(pagination.current_page + 1)" 
+                            :disabled="pagination.current_page === pagination.last_page"
+                            >
+                            Suivant <i class="fas fa-chevron-right"></i>
+                        </button>
                     </div>
                 </div>
                 
@@ -460,7 +498,6 @@
                         </div>
                         
                         <!-- Sections de suivi -->
-                        
 
                         <div class="detail-section" v-if="currentRecord.sonde_followup && currentRecord.sonde_followup.length > 0">
                             <h4><i class="fas fa-catheter"></i> Sondage</h4>
@@ -569,7 +606,18 @@ export default {
     data() {
         return {
             viewMode: 'form', // 'form', 'records', 'record-detail'
-            currentPage: 1,
+            currentPage:1,
+            // Pagination initialisée correctement
+            pagination: {
+                current_page: 1,
+                per_page: 8,
+                from: 0,
+                to: 0,
+                total: 0,
+                last_page: 0
+            },
+            searchQuery: '',
+            searchTimeout: null,
             patientInfo: {
                 name: '',
                 birthDate: '',
@@ -590,7 +638,7 @@ export default {
             ],
             sondeFollowup: [
                 // { date: '', autonomy: 'complète', technique: '', complications: '', mastery: 'bonne' }
-                { autonomy: 'Complète', technique: '', complications: '', mastery: 'Bonne' }
+                { autonomy: 'Complète', technique: '', complications: '', mastery: '' }
             ],
             stomaFollowup: [
                 // { date: '', type: 'colostomie', skinState: 'bon', problem: '', comments: '' }
@@ -623,17 +671,67 @@ export default {
             return this.records.filter(record => 
                 record.patient_name.toLowerCase().includes(query)
             );
-        }
+        },
+        totalPages() {
+            return Math.ceil(this.filteredRecords.length / this.perPage);
+        },
+        paginatedRecords() {
+            const start = (this.currentPage - 1) * this.perPage;
+            const end = start + this.perPage;
+            return this.filteredRecords.slice(start, end);
+        },
         
+        startIndex() {
+            return (this.currentPage - 1) * this.perPage;
+        },
+        
+        endIndex() {
+            const end = this.startIndex + this.perPage;
+            return end > this.filteredRecords.length ? this.filteredRecords.length : end;
+        },
+        // Calcul des pages à afficher dans la pagination
+        pages() {
+            if (!this.pagination.last_page) return [];
+            const start = Math.max(1, this.pagination.current_page - 2);
+            const end = Math.min(this.pagination.last_page, start + 4);
+            const pages = [];
+            for (let i = start; i <= end; i++) {
+                pages.push(i);
+            }
+            
+            return pages;
+        },
+        
+        // Calcul des index de début et fin pour l'affichage
+        paginationRange() {
+            const from = (this.pagination.current_page - 1) * this.pagination.per_page + 1;
+            const to = Math.min(
+                this.pagination.current_page * this.pagination.per_page,
+                this.pagination.total
+            );
+            
+            return { from, to };
+        }
     },
-    // async mounted() {
-    //     try {
-    //     const { data } = await axios.get('/user', { withCredentials: true });
-    //     this.user = data;
-    //     } catch {
-    //     this.user = null;
-    //     }
-    // },
+    watch: {
+        // Réinitialise la page quand la recherche change
+        searchQuery() {
+            this.currentPage = 1;
+        },
+        
+        // Réinitialise la page quand on change de mode
+        viewMode() {
+            this.currentPage = 1;
+        },
+        // Mise à jour des valeurs calculées
+        pagination: {
+            deep: true,
+            handler() {
+                this.pagination.from = this.paginationRange.from;
+                this.pagination.to = this.paginationRange.to;
+            }
+        }
+    },
     methods: {
         navigateToCreateUser() {
             this.$router.push({ name: 'create-user' });
@@ -845,14 +943,13 @@ export default {
                     woundFollowup: this.careTypes.wound ? this.woundFollowup : null
                 });
                 
-                this.recordId = response.data.recordId;
+                // this.recordId = response.data.recordId; // l'id du patient enregistré
                 toastr.success("Dossier médical enregistré avec succès !", 'Succès !');
                 
                 // Réinitialiser le formulaire après enregistrement
                 this.resetForm();
             } catch (error) {
-                console.error("Erreur lors de l'enregistrement:", error);
-                alert("Une erreur est survenue lors de l'enregistrement.");
+                toastr.error("Une erreur est survenue lors de l'enregistrement.","Erreur!");
             }
         },
         
@@ -865,6 +962,7 @@ export default {
                 prescriber: '',
                 phone: ''
             };
+            this.recordId = null,
             this.careTypes = {
                 intermittent: false,
                 stomie: false,
@@ -899,20 +997,6 @@ export default {
             window.location.href = `/records/${this.recordId}/export-pdf`;
         },
         
-        // Méthodes pour la liste des dossiers
-        async fetchRecords() {
-            this.loading = true;
-            try {
-                const response = await axios.get('/records');
-                this.records = response.data;
-            } catch (error) {
-                console.error("Erreur lors du chargement des dossiers:", error);
-                alert("Une erreur est survenue lors du chargement des dossiers.");
-            } finally {
-                this.loading = false;
-            }
-        },
-        
         viewRecord(record) {
             this.currentRecord = record;
             this.viewMode = 'record-detail';
@@ -920,9 +1004,65 @@ export default {
         
         exportRecordPdf(recordId) {
             window.location.href = `/records/${recordId}/export-pdf`;
-        }
+        },
+        // Nouvelles méthodes pour la pagination
+        prevPage() {
+            if (this.currentPage > 1) {
+                this.currentPage--;
+            }
+        },
+        
+        nextPage() {
+            if (this.currentPage < this.totalPages) {
+                this.currentPage++;
+            }
+        },
+        
+        goToPage(page) {
+            this.currentPage = page;
+        },
+        // Méthode pour récupérer les dossiers avec pagination
+        async fetchRecords() {
+            this.loading = true;
+            try {
+                const response = await axios.get('/records', {
+                params: {
+                    page: this.pagination.current_page,
+                    per_page: this.pagination.per_page,
+                    search: this.searchQuery
+                }
+                });
+                
+                this.records = response.data.data;
+                this.pagination = {
+                    ...this.pagination,
+                    ...response.data.pagination
+                };
+            } catch (error) {
+                toastr.error("Une erreur est survenue lors du chargement des dossiers.",'Erreur');
+            } finally {
+                this.loading = false;
+            }
+        },
+        
+        // Changement de page
+        changePage(page) {
+            if (page >= 1 && page <= this.pagination.last_page) {
+                this.pagination.current_page = page;
+                this.fetchRecords();
+            }
+        },
+        
+        // Recherche avec debounce
+        handleSearch() {
+            clearTimeout(this.searchTimeout);
+            this.searchTimeout = setTimeout(() => {
+                this.pagination.current_page = 1;
+                this.fetchRecords();
+            }, 500);
+        },
     },
-     async mounted() {
+    async mounted() {
         try {
             // Récupérer les informations utilisateur
             const { data } = await axios.get('/user', { withCredentials: true });
@@ -933,28 +1073,9 @@ export default {
                 await this.fetchRecords();
             }
         } catch (error) {
-            console.error("Erreur lors du chargement des données utilisateur:", error);
+            toastr.error("Erreur lors du chargement des données utilisateur","Erreur");
             this.user = null;
         }
     }
 };
 </script>
-<style scoped>
-    /* * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    } */
-    /* Styles spécifiques au composant */
-    /* .app-container {
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        width: 100%;
-        background: white;
-        overflow: hidden;
-    } */
-
-    
-</style>
