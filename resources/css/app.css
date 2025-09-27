@@ -17,7 +17,7 @@ html, body, #app {
 } */
 
 header {
-    background: linear-gradient( #ff8f00 0%, #ffb431 100%);
+    background: linear-gradient( #153127 0%, #004f1c 100%);
     color: white;
     padding: 15px 25px;
     display: flex;
@@ -70,30 +70,30 @@ header {
 .app-title {
     text-align: center;
     padding: 25px 20px;
-    background: #fffde7;
-    border-bottom: 1px solid #ffe0b2;
+    background: #9ec29f;
+    border-bottom: 1px solid #98be99;
     flex-shrink: 0;
 }
 
 .app-title h1 {
     font-family: 'Poppins', sans-serif;font-weight: 700;
     /* font-size: 32px; */
-    color: #5d4037;
+    color: #153127;
     /* margin-bottom: 5px; */
 }
 
 .app-title h2 {
     font-size: 20px;
     font-weight: 500;
-    color: #8d6e63;
+    color: #153127;
 }
 
 .navigation {
     display: flex;
     justify-content: center;
     padding: 7px;
-    background: #fff8e1;
-    border-bottom: 1px solid #ffe0b2;
+    background: #ebfaf0;
+    border-bottom: 1px solid #d0faed;
     gap: 15px;
 }
 
@@ -101,22 +101,22 @@ header {
     padding: 12px 25px;
     border-radius: 8px;
     background: #f5f5f5;
-    color: #5d4037;
+    color: #004f1c;
     border: 1px solid #e0e0e0;
     transition: all 0.3s;
 }
 
 .btn-nav.active {
-    background: #FFB431;
+    background: #388e3c;
     color: white;
-    border-color: #FFB431;
+    border-color: #388e3c;
 }
 
 .content-container {
     flex: 1;
     overflow: hidden;
     display: flex;
-    background: #fff9c4;
+    background: #ebfaf0;
 }
 
 .content {
@@ -139,14 +139,14 @@ header {
 
 .welcome-icon {
     font-size: 100px;
-    color: #FFB431;
+    color: #004f1c;
     margin-bottom: 20px;
 }
 
 .welcome-screen h3 {
     font-size: 28px;
     margin-bottom: 30px;
-    color: #5d4037;
+    color: #004f1c;
 }
 
 .welcome-screen p {
@@ -157,40 +157,40 @@ header {
 }
 .form-section-title {
     margin-bottom: 5px;
-    background: #fffde7;
+    background: #f3ffe9;
     padding: 0 15px 0 15px;
     border-radius: 10px;
-    border-left: 5px solid #FFB431;
+    border-left: 5px solid #004f1c;
     box-shadow: 0 4px 8px rgba(141, 110, 99, 0.1);
 }
 .form-section-title h3 {
     font-size: 24px;
     /* margin-bottom: 5px; */
-    color: #5d4037;
+    color: #004f1c;
     display: flex;
     align-items: center;
     gap: 10px;
-    border-bottom: 2px solid #ffd54f;
+    border-bottom: 2px solid #004f1c;
     padding-bottom: 5px;
 }
 
 .form-section {
     margin-bottom: 10px;
-    background: #fffde7;
+    background: #d3f8ed;
     padding: 1px 25px 2px 25px;
     border-radius: 10px;
-    border-left: 5px solid #FFB431;
+    border-left: 5px solid #004f1c;
     box-shadow: 0 4px 8px rgba(141, 110, 99, 0.1);
 }
 
 .form-section h3 {
     font-size: 20px;
     /* margin-bottom: 25px; */
-    color: #5d4037;
+    color: #004f1c;
     display: flex;
     align-items: center;
     gap: 10px;
-    border-bottom: 2px solid #ffd54f;
+    border-bottom: 2px solid #004f1c;
     padding-bottom: 5px;
 }
 
@@ -208,24 +208,24 @@ header {
     display: block;
     margin-bottom: 8px;
     font-weight: 500;
-    color: #6d4c41;
+    color: #004f1c;
     font-size: 17px;
 }
 
 .form-group input, .form-group select, .form-group textarea {
     width: 95%;
     padding: 10px;
-    border: 1px solid #ffe0b2;
+    border: 1px solid #4caf50 ;
     border-radius: 8px;
     font-size: 16px;
-    background: #fff8e1;
+    background: #8ec090 ;
     transition: all 0.3s;
 }
 
 .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
     outline: none;
-    border-color: #FFB431;
-    box-shadow: 0 0 0 3px rgba(255, 179, 0, 0.2);
+    border-color: #4caf50 ;
+    box-shadow: 0 0 0 3px rgba(60, 124, 69, 0.2);
 }
 
 .error {
@@ -250,26 +250,26 @@ header {
     display: flex;
     align-items: center;
     /* margin-bottom: 12px; */
-    background: #fff8e1;
+    background: #8ec090;
     padding: 7px 15px;
     border-radius: 8px;
     transition: all 0.3s;
 }
 
 .checkbox-item:hover {
-    background: #ffecb3;
+    background: #81bd83;
 }
 
 .checkbox-item input {
     margin-right: 12px;
     width: 20px;
     height: 20px;
-    accent-color: #FFB431;
+    accent-color: #004f1c;
 }
 
 .checkbox-item label {
     font-size: 16px;
-    color: #5d4037;
+    color: #004f1c;
     font-weight: 500;
 }
 
@@ -291,33 +291,33 @@ table {
 }
 
 th, td {
-    border: 1px solid #ffe0b2;
+    border: 1px solid #d3f8ed;
     padding: 14px 16px;
     text-align: left;
 }
 
 th {
-    background-color: #FFB431;
-    color: #5d4037;
+    background-color: #153127;
+    color: #06792e;
     font-weight: 600;
     font-size: 16px;
 }
 
 tr:nth-child(even) {
-    background-color: #fff8e1;
+    background-color: #9ec49f;
 }
 
 table input, table select, table textarea {
     width: 95%;
     padding: 8px;
-    border: 1px solid #ffe0b2;
+    border: 1px solid #8ec090;
     border-radius: 4px;
-    background: #fff8e1;
+    background: #8ec090;
 }
 
 table input:focus, table select:focus, table textarea:focus {
     outline: none;
-    border-color: #FFB431;
+    border-color: #548355;
 }
 
 .btn {
@@ -336,24 +336,24 @@ table input:focus, table select:focus, table textarea:focus {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #FFB431 0%, #ff8f00 100%);
+    background: linear-gradient(135deg, #4caf50 0%, #388e3c  100%);
     color: white;
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, #ff8f00 0%, #ff6f00 100%);
+    background: linear-gradient(135deg, #388e3c 0%, #4caf50 100%);
     transform: translateY(-2px);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 
 .btn-secondary {
-    background: linear-gradient(135deg, #8d6e63 0%, #6d4c41 100%);
+    background: linear-gradient(135deg, #388e3c 0%, #4caf50 100%);
     color: white;
     margin-right: 10px;
 }
 
 .btn-secondary:hover {
-    background: linear-gradient(135deg, #6d4c41 0%, #4e342e 100%);
+    background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
     transform: translateY(-2px);
 }
 
@@ -390,7 +390,7 @@ table input:focus, table select:focus, table textarea:focus {
     justify-content: space-between;
     margin-top: 20px;
     padding-top: 15px;
-    border-top: 2px solid #ffe0b2;
+    border-top: 2px solid #05af41;
 }
 
 .page-indicator {
@@ -412,7 +412,7 @@ table input:focus, table select:focus, table textarea:focus {
 }
 
 .page-dot.active {
-    background: #FFB431;
+    background: #004f1c;
     transform: scale(1.2);
 }
 
@@ -423,13 +423,13 @@ table input:focus, table select:focus, table textarea:focus {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #FFB431 0%, #ff8f00 100%);
+    background: linear-gradient(135deg, #51da81 0%, #004f1c 100%);
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 24px;
-    box-shadow: 0 6px 15px rgba(255, 179, 0, 0.4);
+    box-shadow: 0 6px 15px rgba(129, 240, 221, 0.4);
     cursor: pointer;
     z-index: 100;
     transition: all 0.3s;
@@ -440,19 +440,19 @@ table input:focus, table select:focus, table textarea:focus {
 }
 
 .summary-box {
-    background: linear-gradient(135deg, #fffde7 0%, #fff8e1 100%);
+    background: linear-gradient(135deg, #8ec090 0%, #8ec090 100%);
     border-radius: 10px;
     padding: 20px;
     margin-top: 10px;
-    border: 1px solid #ffd54f;
+    border: 1px solid #004f1c;
 }
 
 .section-description {
     font-style: italic;
-    color: #8d6e63;
+    color: #388e3c;
     margin-bottom: 15px;
     padding-left: 10px;
-    border-left: 3px solid #FFB431;
+    border-left: 3px solid #004f1c;
 }
 
 /* Styles pour la liste des dossiers */
@@ -468,14 +468,14 @@ table input:focus, table select:focus, table textarea:focus {
     align-items: center;
     margin-bottom: 15px;
     padding-bottom: 5px;
-    border-bottom: 2px solid #FFB431;
+    border-bottom: 2px solid #004f1c;
 }
 
 .records-header h3 {
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #5d4037;
+    color: #153127;
 }
 
 .search-box {
@@ -486,9 +486,9 @@ table input:focus, table select:focus, table textarea:focus {
 .search-box input {
     width: 100%;
     padding: 12px 15px 12px 40px;
-    border: 1px solid #ffe0b2;
+    border: 1px solid #9ec49f;
     border-radius: 30px;
-    background: #fff8e1;
+    background: #9ec49f;
     font-size: 16px;
 }
 
@@ -497,7 +497,7 @@ table input:focus, table select:focus, table textarea:focus {
     left: 15px;
     top: 50%;
     transform: translateY(-50%);
-    color: #8d6e63;
+    color: #388e3c;
 }
 
 .records-list {
@@ -523,19 +523,19 @@ table input:focus, table select:focus, table textarea:focus {
     justify-content: space-between;
     align-items: center;
     padding: 15px;
-    background: #fff8e1;
-    border-bottom: 1px solid #ffe0b2;
+    background: #9ec49f;
+    border-bottom: 1px solid #a2c9a4;
 }
 
 .patient-info h4 {
     font-size: 18px;
-    color: #5d4037;
+    color: #153127;
     margin-bottom: 5px;
 }
 
 .patient-info p {
     font-size: 14px;
-    color: #8d6e63;
+    color: #388e3c;
 }
 
 .record-actions {
@@ -557,7 +557,7 @@ table input:focus, table select:focus, table textarea:focus {
 
 .record-summary p {
     margin-bottom: 8px;
-    color: #5d4037;
+    color: #153127;
 }
 
 .loading {
@@ -566,7 +566,7 @@ table input:focus, table select:focus, table textarea:focus {
     align-items: center;
     justify-content: center;
     padding: 50px;
-    color: #5d4037;
+    color: #153127;
     font-size: 18px;
     gap: 15px;
 }
@@ -578,7 +578,7 @@ table input:focus, table select:focus, table textarea:focus {
     justify-content: center;
     padding: 50px;
     text-align: center;
-    color: #8d6e63;
+    color: #388e3c;
 }
 
 .no-records i {
@@ -605,17 +605,17 @@ table input:focus, table select:focus, table textarea:focus {
     align-items: center;
     margin-bottom: 30px;
     padding-bottom: 15px;
-    border-bottom: 2px solid #FFB431;
+    border-bottom: 2px solid #004f1c;
 }
 
 .detail-header h3 {
-    color: #5d4037;
+    color: #153127;
     flex: 1;
     text-align: center;
 }
 
 .btn-back {
-    background: linear-gradient(135deg, #8d6e63 0%, #6d4c41 100%);
+    background: linear-gradient(135deg, #388e3c 0%, #004f1c  100%);
     color: white;
 }
 
@@ -627,20 +627,20 @@ table input:focus, table select:focus, table textarea:focus {
 
 .detail-section {
     margin-bottom: 10px;
-    background: #fffde7;
+    background: #98be99;
     padding: 1px 25px 2px 25px;
     border-radius: 10px;
-    border-left: 5px solid #FFB431;
+    border-left: 5px solid #004f1c;
 }
 
 .detail-section h4 {
     font-size: 22px;
     margin-bottom: 25px;
-    color: #5d4037;
+    color: #153127;
     display: flex;
     align-items: center;
     gap: 10px;
-    border-bottom: 2px solid #ffd54f;
+    border-bottom: 2px solid #004f1c;
     padding-bottom: 10px;
 }
 
@@ -658,15 +658,15 @@ table input:focus, table select:focus, table textarea:focus {
     display: block;
     margin-bottom: 5px;
     font-weight: 500;
-    color: #6d4c41;
+    color: #004f1c;
     font-size: 16px;
 }
 
 .detail-grid p {
     padding: 10px;
-    background: #fff8e1;
+    background: #98be99;
     border-radius: 8px;
-    border: 1px solid #ffe0b2;
+    border: 1px solid #98be99;
     /* min-height: 44px; */
 }
 
@@ -720,7 +720,7 @@ table input:focus, table select:focus, table textarea:focus {
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
     font-size: 2rem;
-    color: #5d4037;
+    color: #153127;
     line-height: 1.3;
 }
 
@@ -748,7 +748,7 @@ table input:focus, table select:focus, table textarea:focus {
 
 .pagination-btn {
   padding: 8px 15px;
-  background: #ff8f00;
+  background: #004f1c;
   color: white;
   border: none;
   border-radius: 6px;
@@ -765,7 +765,7 @@ table input:focus, table select:focus, table textarea:focus {
 }
 
 .pagination-btn:hover:not(:disabled) {
-  background: #ff6f00;
+  background: #033d18;
 }
 
 .pagination-pages {
@@ -780,18 +780,18 @@ table input:focus, table select:focus, table textarea:focus {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  border: 1px solid #ffe0b2;
+  border: 1px solid #98be99;
   background: white;
   cursor: pointer;
   transition: all 0.3s;
 }
 
 .page-btn.active {
-  background: #ff8f00;
+  background: #004f1c;
   color: white;
-  border-color: #ff8f00;
+  border-color: #05722b;
 }
 
 .page-btn:hover:not(.active) {
-  background: #fff8e1;
+  background: #9ec49f;
 }

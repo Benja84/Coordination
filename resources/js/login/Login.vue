@@ -58,7 +58,7 @@ form {
 }
 h2 {
   margin-bottom: 25px;
-  color: #5d4037;
+  color: #153127;
   text-align: center;
 }
 .form-group {
@@ -67,12 +67,12 @@ h2 {
 label {
   display: block;
   margin-bottom: 5px;
-  color: #6d4c41;
+  color: #153127;
 }
 input {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ffe0b2;
+  border: 1px solid #98be99;
   border-radius: 6px;
 }
 .error {

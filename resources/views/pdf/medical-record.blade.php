@@ -5,7 +5,7 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Roboto', sans-serif; color: #5d4037;font-size: 12px; }
+        body { font-family: 'Roboto', sans-serif; color: #153127;font-size: 12px; }
         .header { 
             margin-top: -15px;
             margin-bottom: 10px;  
@@ -14,19 +14,19 @@
             font-family: 'Poppins', sans-serif;
             font-weight: 700;
             font-size: 2rem;
-            color: #5d4037;
+            color: #153127;
             line-height: 1.3;
         }
-        .subtitle-patient,.subtitle-section{ font-size: 12px; color: #8d6e63;}
-        .subtitle{ font-size: 20px; color: #8d6e63; text-align: center;}
+        .subtitle-patient,.subtitle-section{ font-size: 12px; color: #004f1c;}
+        .subtitle{ font-size: 20px; color: #004f1c; text-align: center;}
         /* .header { text-align: center; margin-bottom: 30px; }
         .title { font-size: 24px; font-weight: bold; margin-bottom: 10px; }
         .subtitle { font-size: 15px; margin-bottom: 20px; } */
         .section { margin-bottom: 15px; }
-        .section-title { font-size: 15px; font-weight: bold; border-bottom: 2px solid #ffb300; padding-bottom: 5px; margin-bottom: 15px; }
+        .section-title { font-size: 15px; font-weight: bold; border-bottom: 2px solid #004f1c; padding-bottom: 5px; margin-bottom: 15px; }
         .section table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
-        .section th, .section td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        .section th { background-color: #ffb300; }
+        .section th, .section td { border: 1px solid #a6d388; padding: 8px; text-align: left; }
+        .section th { background-color: #d3f8ed; }
         .summary { background-color: #fff8e1; padding: 15px; border-radius: 5px; margin-top: 20px; }
     </style>
 </head>
