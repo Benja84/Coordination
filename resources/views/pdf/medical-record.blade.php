@@ -44,7 +44,7 @@
                     <span class="subtitle-patient">Prise en charge du patient</span><br>
                 </td>
                 <td style="text-align: right; vertical-align: middle;">
-                    <img src="data:image/svg+xml;base64,{{ base64_encode(file_get_contents(public_path('images/Ousoft.png'))) }}"
+                    <img src="data:image/svg+xml;base64,{{ base64_encode(file_get_contents(public_path('images/Logo_b.png'))) }}"
                         alt="OUSOFT" style="height: 80px;">
                 </td>
             </tr>

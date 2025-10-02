@@ -91,7 +91,7 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-primary" :disabled="loading">
+      <button type="submit" class="btn btn-primary" style="width: 97%;" :disabled="loading">
         {{ loading ? 'Création...' : 'Créer l’utilisateur' }}
       </button>
     </form>
@@ -142,6 +142,83 @@ export default {
     return { form, errors, loading, createUser };
   }
 };
+// export default {
+//   name: 'CreateUser',
+//   setup() {
+//     const router = useRouter();
+//     const loading = ref(false);
+//     const successMessage = ref('');
+//     const warningMessage = ref('');
+//     const errorMessage = ref('');
+    
+//     const form = reactive({
+//       lastname: '',
+//       firstname: '',
+//       email: '',
+//       password: '',
+//       password_confirmation: '',
+//       type: 0,
+//     });
+    
+//     const errors = reactive({});
+
+//     const createUser = async () => {
+//       loading.value = true;
+//       errors.value = {};
+//       successMessage.value = '';
+//       warningMessage.value = '';
+//       errorMessage.value = '';
+      
+//       try {
+//         const response = await axios.post('/users/save', form);
+        
+//         if (response.data.success) {
+//           successMessage.value = response.data.message;
+          
+//           if (response.data.warning) {
+//             warningMessage.value = response.data.warning;
+//           }
+          
+//           // Réinitialiser le formulaire après succès
+//           Object.assign(form, {
+//             lastname: '',
+//             firstname: '',
+//             email: '',
+//             password: '',
+//             password_confirmation: '',
+//             type: 0,
+//           });
+          
+//           // Redirection optionnelle après délai
+//           setTimeout(() => {
+//             router.push('/');
+//           }, 3000);
+//         }
+        
+//       } catch (error) {
+//         if (error.response && error.response.status === 422) {
+//           Object.assign(errors, error.response.data.errors);
+//           errorMessage.value = 'Veuillez corriger les erreurs dans le formulaire.';
+//         } else {
+//           errorMessage.value = 'Une erreur inattendue est survenue.';
+//           console.error(error);
+//         }
+//       } finally {
+//         loading.value = false;
+//       }
+//     };
+
+//     return { 
+//       form, 
+//       errors, 
+//       loading, 
+//       successMessage, 
+//       warningMessage, 
+//       errorMessage, 
+//       createUser 
+//     };
+//   }
+// };
 </script>
 <style>
   #create-user{
@@ -156,7 +233,7 @@ export default {
   }
   .create-title{
     margin-top: -5px;
-    color: #8d6e63;
+    color: #153127;
   }
   .invalid-feedback{
     color: red;
